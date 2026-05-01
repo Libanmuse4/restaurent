@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Di Fara Pizza — Brooklyn, NY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --red:#c0392b;
+  --dark-red:#8e1a0e;
+  --cream:#faf6ef;
+  --warm:#f0e6d3;
+  --ink:#1a1208;
+  --muted:#6b5c45;
+  --border:rgba(26,18,8,0.12);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Source Sans 3',system-ui,sans-serif;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--cream);color:var(--ink);overflow-x:hidden}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 3rem;
+  background:rgba(26,18,8,0.92);
+  backdrop-filter:blur(10px);
+}
+.nav-logo{
+  font-family:var(--serif);font-size:1.4rem;color:var(--cream);
+  text-decoration:none;font-style:italic;letter-spacing:0.01em;
+}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  color:rgba(250,246,239,0.65);text-decoration:none;
+  font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--cream)}
+.nav-order{
+  background:var(--red);color:var(--cream);
+  padding:0.5rem 1.4rem;border-radius:2px;
+  text-decoration:none;font-size:0.82rem;font-weight:500;
+  letter-spacing:0.06em;text-transform:uppercase;
+  transition:background 0.2s;
+}
+.nav-order:hover{background:var(--dark-red)}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  background: linear-gradient(rgba(12,8,4,0.62) 0%, rgba(12,8,4,0.38) 60%, rgba(12,8,4,0.72) 100%),
+    url('https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=1600&q=80') center/cover no-repeat;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:6rem 2rem 4rem;
+  position:relative;
+}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:rgba(192,57,43,0.9);
+  color:var(--cream);font-size:0.75rem;letter-spacing:0.1em;
+  text-transform:uppercase;padding:0.4rem 1rem;border-radius:1px;
+  margin-bottom:2rem;font-weight:500;
+}
+.star{color:#f4c430;font-size:0.85rem}
+
+.hero h1{
+  font-family:var(--serif);font-size:clamp(3.5rem,8vw,7rem);
+  color:var(--cream);line-height:1;letter-spacing:-0.02em;
+  margin-bottom:0.3rem;
+  text-shadow:0 2px 20px rgba(0,0,0,0.4);
+}
+.hero h1 em{font-style:italic;color:#f4c430}
+
+.hero-sub{
+  font-size:1rem;color:rgba(250,246,239,0.7);
+  margin:1.2rem auto 0;max-width:38ch;line-height:1.7;
+  font-weight:300;letter-spacing:0.01em;
+}
+
+.hero-address{
+  margin-top:2.5rem;
+  color:rgba(250,246,239,0.55);
+  font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;
+}
+
+.hero-cta{
+  margin-top:2.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+}
+.btn{
+  display:inline-block;padding:0.85rem 2.2rem;border-radius:2px;
+  font-size:0.85rem;font-weight:500;letter-spacing:0.06em;
+  text-transform:uppercase;text-decoration:none;cursor:pointer;transition:all 0.2s;
+}
+.btn-red{background:var(--red);color:var(--cream);border:1.5px solid var(--red)}
+.btn-red:hover{background:var(--dark-red);border-color:var(--dark-red);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--cream);border:1.5px solid rgba(250,246,239,0.4)}
+.btn-outline:hover{border-color:var(--cream);transform:translateY(-2px)}
+
+.hero-scroll{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  color:rgba(250,246,239,0.4);font-size:0.72rem;letter-spacing:0.12em;
+  text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  animation:bounce 2.5s infinite;
+}
+.hero-scroll::after{content:'↓';font-size:1rem}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* STRIP */
+.info-strip{
+  background:var(--ink);color:var(--cream);
+  display:flex;justify-content:center;flex-wrap:wrap;gap:0;
+}
+.info-item{
+  display:flex;align-items:center;gap:0.6rem;
+  padding:1rem 2.5rem;font-size:0.82rem;letter-spacing:0.05em;
+  border-right:1px solid rgba(250,246,239,0.1);
+}
+.info-item:last-child{border-right:none}
+.info-item .icon{font-size:1rem;opacity:0.7}
+.info-item span{opacity:0.65}
+
+/* STORY */
+.story{
+  display:grid;grid-template-columns:1fr 1fr;
+  max-width:1100px;margin:0 auto;padding:7rem 3rem;gap:5rem;align-items:center;
+}
+.story-img{
+  position:relative;
+}
+.story-img img{
+  width:100%;aspect-ratio:4/5;object-fit:cover;
+  filter:sepia(8%) contrast(1.05);
+}
+.story-img::before{
+  content:'Est. 1965';
+  position:absolute;bottom:-1.5rem;right:-1.5rem;
+  background:var(--red);color:var(--cream);
+  font-family:var(--serif);font-style:italic;font-size:1.1rem;
+  padding:1rem 1.5rem;z-index:2;
+}
+.story-text .eyebrow{
+  font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--red);font-weight:500;margin-bottom:1.2rem;
+}
+.story-text h2{
+  font-family:var(--serif);font-size:clamp(2rem,3vw,2.8rem);
+  line-height:1.15;letter-spacing:-0.02em;margin-bottom:1.5rem;
+}
+.story-text p{
+  color:var(--muted);line-height:1.8;margin-bottom:1rem;font-size:0.97rem;
+}
+.story-text blockquote{
+  border-left:3px solid var(--red);padding-left:1.2rem;margin:2rem 0;
+  font-family:var(--serif);font-style:italic;font-size:1.05rem;
+  color:var(--ink);line-height:1.6;
+}
+
+/* MENU HIGHLIGHTS */
+.menu-section{background:var(--warm);padding:7rem 3rem}
+.menu-inner{max-width:1100px;margin:0 auto}
+.section-heading{
+  display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem;
+}
+.section-heading h2{
+  font-family:var(--serif);font-size:clamp(2rem,3.5vw,3rem);letter-spacing:-0.02em;
+}
+.section-heading .eyebrow{
+  font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--red);font-weight:500;margin-bottom:0.5rem;
+}
+.menu-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;
+}
+.menu-card{
+  background:var(--cream);padding:2rem;
+  border:1px solid var(--border);position:relative;
+  transition:transform 0.25s,box-shadow 0.25s;
+}
+.menu-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(26,18,8,0.1)}
+.menu-card .popular-badge{
+  position:absolute;top:1rem;right:1rem;
+  background:var(--red);color:var(--cream);
+  font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;
+  padding:0.2rem 0.6rem;border-radius:1px;font-weight:500;
+}
+.menu-card h3{
+  font-family:var(--serif);font-size:1.3rem;letter-spacing:-0.01em;margin-bottom:0.5rem;
+}
+.menu-card p{font-size:0.87rem;color:var(--muted);line-height:1.6;margin-bottom:1.2rem}
+.menu-card .price{
+  font-size:1rem;font-weight:500;color:var(--red);
+}
+
+/* REVIEWS */
+.reviews-section{padding:7rem 3rem;max-width:1100px;margin:0 auto}
+.rating-hero{
+  text-align:center;margin-bottom:4rem;
+}
+.rating-hero .big-num{
+  font-family:var(--serif);font-size:5rem;font-weight:700;line-height:1;
+  color:var(--ink);
+}
+.stars-row{color:#f4c430;font-size:1.3rem;letter-spacing:0.1rem;margin:0.5rem 0}
+.rating-hero .count{font-size:0.85rem;color:var(--muted);letter-spacing:0.04em}
+
+.reviews-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;
+}
+.review-card{
+  background:var(--cream);border:1px solid var(--border);padding:2rem;
+  position:relative;
+}
+.review-card::before{
+  content:'"';font-family:var(--serif);font-size:5rem;color:var(--red);
+  opacity:0.12;position:absolute;top:-0.5rem;left:1.2rem;line-height:1;
+  pointer-events:none;
+}
+.reviewer{display:flex;align-items:center;gap:0.75rem;margin-bottom:1.2rem}
+.reviewer-avatar{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--red);display:flex;align-items:center;justify-content:center;
+  color:var(--cream);font-weight:500;font-size:0.85rem;flex-shrink:0;
+}
+.reviewer-name{font-weight:500;font-size:0.9rem}
+.reviewer-meta{font-size:0.75rem;color:var(--muted)}
+.review-stars{color:#f4c430;font-size:0.8rem;margin-bottom:0.75rem}
+.review-card p{font-size:0.9rem;color:var(--muted);line-height:1.7;font-style:italic}
+
+/* LOCATION */
+.location-section{
+  background:var(--ink);color:var(--cream);
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.location-info{padding:5rem 4rem}
+.location-info .eyebrow{
+  font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--red);font-weight:500;margin-bottom:1.5rem;
+}
+.location-info h2{
+  font-family:var(--serif);font-size:clamp(2rem,3vw,2.8rem);
+  letter-spacing:-0.02em;margin-bottom:2rem;
+}
+.location-detail{
+  display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem;
+}
+.location-detail .icon{font-size:1.1rem;margin-top:0.1rem;flex-shrink:0}
+.location-detail strong{display:block;font-size:0.82rem;letter-spacing:0.06em;
+  text-transform:uppercase;color:rgba(250,246,239,0.45);margin-bottom:0.3rem}
+.location-detail span{color:rgba(250,246,239,0.8);font-size:0.95rem;line-height:1.5}
+.location-map{
+  background:#2a1f14;
+  display:flex;align-items:center;justify-content:center;
+  min-height:400px;position:relative;overflow:hidden;
+}
+.location-map iframe{
+  width:100%;height:100%;border:0;filter:grayscale(30%) sepia(15%);
+  position:absolute;inset:0;
+}
+.map-overlay-btn{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  background:var(--red);color:var(--cream);padding:0.75rem 1.8rem;
+  text-decoration:none;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;
+  font-weight:500;border-radius:2px;white-space:nowrap;z-index:2;
+  transition:background 0.2s;
+}
+.map-overlay-btn:hover{background:var(--dark-red)}
+
+/* FOOTER */
+footer{
+  background:#0f0a06;color:rgba(250,246,239,0.35);
+  padding:2rem 3rem;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:0.78rem;letter-spacing:0.04em;flex-wrap:wrap;gap:1rem;
+}
+footer a{color:rgba(250,246,239,0.5);text-decoration:none}
+footer a:hover{color:var(--cream)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .story{grid-template-columns:1fr;gap:3rem;padding:4rem 1.5rem}
+  .story-img::before{bottom:-1rem;right:0}
+  .menu-section,.reviews-section{padding:4rem 1.5rem}
+  .location-section{grid-template-columns:1fr}
+  .location-info{padding:3rem 1.5rem}
+  .location-map{min-height:300px}
+  footer{flex-direction:column;text-align:center;padding:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Di Fara Pizza</a>
+  <ul class="nav-links">
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#location">Visit Us</a></li>
+  </ul>
+  <a href="http://difarapizzany.com" target="_blank" class="nav-order">Order Online</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="star">★</span> 4.2 · 4,631 Reviews · Brooklyn's Finest Since 1965
+  </div>
+  <h1>Di Fara<br><em>Pizza</em></h1>
+  <p class="hero-sub">Pizza fans trek to this storied Midwood storefront to queue up for slices that have defined New York pizza for over half a century.</p>
+  <p class="hero-address">1424 Avenue J, Brooklyn, NY 11230</p>
+  <div class="hero-cta">
+    <a href="http://difarapizzany.com" target="_blank" class="btn btn-red">Order Online</a>
+    <a href="#menu" class="btn btn-outline">View Menu</a>
+  </div>
+  <span class="hero-scroll">Scroll</span>
+</section>
+
+<!-- INFO STRIP -->
+<div class="info-strip">
+  <div class="info-item"><span class="icon">🕐</span><span>Opens 12 PM Daily</span></div>
+  <div class="info-item"><span class="icon">🍕</span><span>Dine-in &amp; Takeaway</span></div>
+  <div class="info-item"><span class="icon">🛵</span><span>No-contact Delivery</span></div>
+  <div class="info-item"><span class="icon">💵</span><span>$10–20 per person</span></div>
+  <div class="info-item"><span class="icon">📞</span><span>+1 718-258-1367</span></div>
+</div>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-img reveal">
+    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80" alt="Di Fara Pizza kitchen">
+  </div>
+  <div class="story-text reveal">
+    <p class="eyebrow">Our Story</p>
+    <h2>A Brooklyn Institution, Baked with Love.</h2>
+    <p>Since 1965, Di Fara Pizza has been serving up some of the most celebrated slices in New York City from the same no-frills Midwood storefront on Avenue J.</p>
+    <p>Every pie is crafted with the same dedication it has always been — fresh ingredients, housemade sauce, and the kind of care you can only put into something you've been perfecting for decades.</p>
+    <blockquote>"Crust was right, sauce tasted homemade — just the right amount of cheese."</blockquote>
+    <p>Whether you're a Brooklyn local or making a dedicated pilgrimage, the wait is always worth it.</p>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-inner">
+    <div class="section-heading reveal">
+      <div>
+        <p class="eyebrow">What We Serve</p>
+        <h2>Menu Highlights</h2>
+      </div>
+      <a href="http://difarapizzany.com" target="_blank" class="btn btn-red" style="font-size:0.78rem;padding:0.65rem 1.4rem">Full Menu ↗</a>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card reveal">
+        <span class="popular-badge">Popular</span>
+        <h3>Plain Slice</h3>
+        <p>The classic. Fresh mozzarella, house tomato sauce on a perfectly crisped crust. The one that started it all.</p>
+        <span class="price">$5+</span>
+      </div>
+      <div class="menu-card reveal">
+        <span class="popular-badge">Popular</span>
+        <h3>Sauce &amp; Cheese Pie</h3>
+        <p>A full pie of our signature sauce with fresh cheese — simple, iconic, unforgettable.</p>
+        <span class="price">$28+</span>
+      </div>
+      <div class="menu-card reveal">
+        <h3>Square Pizza</h3>
+        <p>Our Sicilian-style square slice with a thick, airy crust and a generous layer of toppings.</p>
+        <span class="price">$6+</span>
+      </div>
+      <div class="menu-card reveal">
+        <h3>Custom Toppings</h3>
+        <p>Build your own pie — mushrooms, onions, semi sun-dried tomatoes, and much more.</p>
+        <span class="price">$2+ per topping</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="rating-hero reveal">
+    <div class="big-num">4.2</div>
+    <div class="stars-row">★★★★☆</div>
+    <p class="count">Based on 4,631 Google Reviews</p>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="reviewer">
+        <div class="reviewer-avatar">GL</div>
+        <div>
+          <div class="reviewer-name">Gabrielle L.</div>
+          <div class="reviewer-meta">Local Guide · 1 month ago</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <p>I was in Brooklyn visiting from Philly and decided to make the trek. Both the pizza and the atmosphere are pretty incredible. Di Fara does a crushed tomato style that is very slightly different from what I was expecting — and better.</p>
+    </div>
+    <div class="review-card reveal">
+      <div class="reviewer">
+        <div class="reviewer-avatar">JD</div>
+        <div>
+          <div class="reviewer-name">Joseph D.</div>
+          <div class="reviewer-meta">Local Guide · 5 months ago</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <p>This incredible hole-in-the-wall in Brooklyn had some of the most incredible pizza I've ever had. Crust was crisp, cheese was fresh and sauce was just right. The guys behind the counter were incredibly friendly.</p>
+    </div>
+    <div class="review-card reveal">
+      <div class="reviewer">
+        <div class="reviewer-avatar">JA</div>
+        <div>
+          <div class="reviewer-name">Jonathan A.</div>
+          <div class="reviewer-meta">Local Guide · 3 months ago</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <p>Top 5 pizza in my life. Six of us did a pizza tour in Brooklyn today and this was the first stop. I honestly don't think the next place will hold up to this. Absolutely phenomenal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div class="location-info reveal">
+    <p class="eyebrow">Find Us</p>
+    <h2>Come Visit<br>the Original.</h2>
+    <div class="location-detail">
+      <span class="icon">📍</span>
+      <div>
+        <strong>Address</strong>
+        <span>1424 Avenue J<br>Brooklyn, NY 11230</span>
+      </div>
+    </div>
+    <div class="location-detail">
+      <span class="icon">🕐</span>
+      <div>
+        <strong>Hours</strong>
+        <span>Opens 12 PM daily<br>Hours may vary — call ahead</span>
+      </div>
+    </div>
+    <div class="location-detail">
+      <span class="icon">📞</span>
+      <div>
+        <strong>Phone</strong>
+        <span><a href="tel:+17182581367" style="color:rgba(250,246,239,0.8);text-decoration:none">+1 718-258-1367</a></span>
+      </div>
+    </div>
+    <div class="location-detail">
+      <span class="icon">🌐</span>
+      <div>
+        <strong>Online</strong>
+        <span><a href="http://difarapizzany.com" target="_blank" style="color:rgba(250,246,239,0.8)">difarapizzany.com</a></span>
+      </div>
+    </div>
+  </div>
+  <div class="location-map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3025.9!2d-73.9612!3d40.6249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c244c9a5e1e7d1%3A0x1!2s1424+Avenue+J%2C+Brooklyn%2C+NY+11230!5e0!3m2!1sen!2sus!4v1"
+      allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="Di Fara Pizza location map">
+    </iframe>
+    <a href="https://maps.google.com/?q=1424+Avenue+J+Brooklyn+NY" target="_blank" class="map-overlay-btn">Get Directions ↗</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Di Fara Pizza · Brooklyn, NY</span>
+  <span>
+    <a href="tel:+17182581367">+1 718-258-1367</a> &nbsp;·&nbsp;
+    <a href="http://difarapizzany.com" target="_blank">difarapizzany.com</a>
+  </span>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'), i*90);
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
